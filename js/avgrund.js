@@ -5,12 +5,11 @@
  *
  * Copyright (C) 2012 Hakim El Hattab, http://hakim.se
  */
-var Avgrund = (function(){
-
+function Avgrund (popup_selector) {
 	var self = this,
-		popup = {},
+		popup = document.querySelector(popup_selector),
+		container = document.getElementsByTagName('body')[0],
 		wrapper = {},
-		container = {},
 		currentState = false
 
 	// Deactivate on ESC
@@ -22,7 +21,6 @@ var Avgrund = (function(){
 
 	// Deactivate on click outside
 	function onDocumentClick( event ) {
-		console.log(event.target)
 		var bubble = event.target
 		while (bubble) {
 			if (bubble === popup)
@@ -70,9 +68,7 @@ var Avgrund = (function(){
 		element.className = element.className.replace( ' ' + name, '' )
 	}
 
-	function show(selector){
-		popup = document.querySelector( selector )
-		container = document.getElementsByTagName('body')[0]
+	function show(){
 		wrapper = document.createElement('div')
 		for (var i = -1, len = container.childNodes.length; ++i < len;) {
 			var child = container.childNodes[i]
@@ -85,6 +81,7 @@ var Avgrund = (function(){
 		activate()
 		return self
 	}
+	self.show = show
 	function hide() {
 		for (var i = -1, len = wrapper.childNodes.length; ++i < len;) {
 			container.appendChild(wrapper.childNodes[i]) && --i && --len
@@ -92,13 +89,7 @@ var Avgrund = (function(){
 		container.removeChild(wrapper)
 		deactivate()
 	}
+	self.hide = hide
 
-	return {
-		activate: activate,
-		deactivate: deactivate,
-		disableBlur: disableBlur,
-		show: show,
-		hide: hide
-	}
-
-})()
+	return self
+}
