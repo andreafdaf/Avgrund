@@ -1,0 +1,30 @@
+.avgrund-container-animate
+	> *
+		&:not(.avgrund-popup)
+			transition: 0.5s all cubic-bezier(0.250, 0.460, 0.450, 0.940)
+			transform: scale( 0.98 )
+			filter: blur(2px)
+		&.avgrund-popup
+			transition: 0.3s all ease-in-out
+			transform: scale( 1.2 )
+			filter: blur(0px)
+
+.avgrund-popup 
+	position: fixed
+	width: 340px
+	height: 180px
+	left: 50%
+	top: 50%
+	margin: -130px 0 0 -190px
+	visibility: hidden
+	opacity: 0
+	z-index: 2
+	padding: 20px
+
+	background: white
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 )
+	border-radius: 3px
+
+	&.show-avgrund
+		visibility: visible
+		opacity: 1
